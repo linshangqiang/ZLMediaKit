@@ -15,7 +15,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-#include "SDL2/SDL.h"
+#include "SDL.h"
 #include "libavcodec/avcodec.h"
 #ifdef __cplusplus
 }
