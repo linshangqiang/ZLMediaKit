@@ -27,7 +27,9 @@
 #include "Rtp/RtpServer.h"
 #include "WebApi.h"
 #include "WebHook.h"
-
+#include "Rtp/inputRtp.h"
+#include "Poller/EventPoller.h"
+#include "Poller/PipeWrap.h"
 
 #if !defined(_WIN32)
 #include "System.h"
@@ -357,8 +359,12 @@ int start_main(int argc,char *argv[]) {
 
 #ifndef DISABLE_MAIN
 int main(int argc,char *argv[]) {
-
-   // return start_main(argc,argv);
+   // InputRtp::instance().queueInit();
+   // cout << InputRtp::instance().SSRC_Queue.size() << endl;
+  //  InputCB = EventPoller::Instance().GetInputRtp();
+ 
+  //  InputRtp::instance().Unpack()
+    return start_main(argc,argv);
 }
 #endif //DISABLE_MAIN
 

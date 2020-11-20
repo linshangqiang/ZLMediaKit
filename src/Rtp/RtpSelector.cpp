@@ -12,6 +12,7 @@
 #include <stddef.h>
 #include "RtpSelector.h"
 #include "RtpSplitter.h"
+#include "rtp/inputRtp.h"
 
 namespace mediakit{
 
@@ -24,21 +25,16 @@ void RtpSelector::clear(){
 
 bool RtpSelector::inputRtp(const Socket::Ptr &sock, const char *data, int data_len,
                            const struct sockaddr *addr,uint32_t *dts_out) {
-    uint32_t ssrc = 0;
+  
+    InputRtp::instance().queuePushSSRC(sock,data, data_len, addr, dts_out);//拷贝一份data数据
+  /*  uint32_t ssrc = 0;
     if (!getSSRC(data, data_len, ssrc)) {
         WarnL << "get ssrc from rtp failed:" << data_len;
         return false;
-    }
-
-    auto process = getProcess(printSSRC(ssrc), true);
-    if (process) {
-        try {
-            return process->inputRtp(true, sock, data, data_len, addr, dts_out);
-        } catch (...) {
-            delProcess(printSSRC(ssrc), process.get());
-            throw;
-        }
-    }
+    }*/
+    
+    
+   
     return false;
 }
 
